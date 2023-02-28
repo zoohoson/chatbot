@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1 font-family: HYUNDAIlight>HiHELP</h1>
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Hello HD people ^^7. I'm HiHELP.</span></p>
+        
+      </div>
+      <div id = "chatbox">
+        <button id="clickbutton" onclick="AIsolution()"></button>
+      </div>
+      <div id="userInput">
+        
+        <input id="textInput" type="text" name="msg" placeholder="Message">
+        <input id="buttonInput" type="submit" value="Send">
+      </div>
+      <script>
+        $('document').ready(function(){document.getElementById("clickbutton").style.display = "none";})
+        function getBotResponse() {
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText.toUpperCase() + '</span></p>';
+          $("#textInput").val("");
+          var response = ""
+          const btn = document.getElementById("clickbutton");
+          if (userHtml.includes('MAIN ENGINE') || userHtml.includes("GENERATOR ENGINE") || userHtml.includes("ROTATOR")){
+            response = 'HiCBM';
+            btn.innerText  = "Go to HiCBM"
+            btn.style.display = "";
+
+          }
+          else if (userHtml.includes('CCTV')|| userHtml.includes('SAFETY') || userHtml.includes('FIRE')|| userHtml.includes('SOS')){
+            response = 'HiCAMS';
+            btn.innerText  = "Go to HiCAMS"
+            btn.style.display = ""
+          }
+          else if (userHtml.includes('MAP')|| userHtml.includes("ROUTE")){
+            response = 'HiMAP';
+            btn.innerText  = "Go to HiMAP"
+            btn.style.display =""
+          }
+          $("#chatbox").append('<p class="userText"><span>' + rawText + '</span></p>');
+          // $("#chatbox").append(response);
+
+          document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          $.get("/get", { msg: rawText }).done(function(data) {
+            var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+            $("#chatbox").append(botHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+          });
+        }
+
+        function AIsolution(){
+          const btn = document.getElementById("clickbutton");
+          if (btn.innerText == 'Go to HiCBM') {
+            window.location = "http://10.130.67.140:8001/";
+
+          }
+          else if(btn.innerText == "Go to HiCAMS"){
+            window.location = "http://10.130.67.140:8000/";
+          }
+          else{
+            window.location = "http://10.130.67.140:8000/"
+          }
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+          getBotResponse();
+        })
+      </script>
+      <p>
+      </p>
+    </div>
+  </body>
+</html>
