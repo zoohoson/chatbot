@@ -1,2 +1,5 @@
-HiHELP
-conda env create -n requirements.yml
+# HiHELP
+
+1. installation  
+
+> conda env create -n requirements.yml
