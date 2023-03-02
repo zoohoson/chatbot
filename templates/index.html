@@ -72,6 +72,7 @@
         }
 
         function checkresponse(userresponse, btn, check = false){
+          btn.style.display = "none";
           var response = ""
           if (
             userresponse.includes("MAIN ENGINE") ||
@@ -82,8 +83,7 @@
             console.log("Hicbm")
             response = "HiCBM";
             btn.innerText = "Go to HiCBM";
-            if (check == false){btn.style.display = "none";}
-            else{btn.style.display = ""}
+            if (check == true) {btn.style.display = ""}
             
           } else if (
             userresponse.includes("CCTV") ||
@@ -93,13 +93,11 @@
           ) {
             response = "HiCAMS";
             btn.innerText = "Go to HiCAMS";
-            if (check == false){btn.style.display = "none";}
-            else{btn.style.display = ""}
+            if (check == true) {btn.style.display = ""}
           } else if (userresponse.includes("MAP") || userresponse.includes("ROUTE")) {
             response = "HiMAP";
             btn.innerText = "Go to HiMAP";
-            if (check == false){btn.style.display = "none";}
-            else{btn.style.display = ""}
+            if (check == true) {btn.style.display = ""}
           }
 
         }
