@@ -44,33 +44,12 @@
           $("#textInput").val("");
           var response = "";
           const btn = document.getElementById("clickbutton");
-
-          if (
-            userHtml.includes("MAIN ENGINE") ||
-            userHtml.includes("GENERATOR ENGINE") ||
-            userHtml.includes("ROTATOR")
-          ) {
-            response = "HiCBM";
-            btn.innerText = "Go to HiCBM";
-            btn.style.display = "";
-          } else if (
-            userHtml.includes("CCTV") ||
-            userHtml.includes("SAFETY") ||
-            userHtml.includes("FIRE") ||
-            userHtml.includes("SOS")
-          ) {
-            response = "HiCAMS";
-            btn.innerText = "Go to HiCAMS";
-            btn.style.display = "";
-          } else if (userHtml.includes("MAP") || userHtml.includes("ROUTE")) {
-            response = "HiMAP";
-            btn.innerText = "Go to HiMAP";
-            btn.style.display = "";
-          }
-
           $("#chatbox").append(
             '<p class="userText"><span>' + rawText + "</span></p>"
           );
+          checkresponse(userHtml, btn, false)
+          
+
           // $("#chatbox").append(response);
           document
             .getElementById("userInput")
@@ -78,20 +57,60 @@
           $.get("/get", { msg: rawText }).done(function (data) {
             var botHtml = '<p class="botText"><span>' + data + "</span></p>";
             $("#chatbox").append(botHtml);
+            checkresponse('<p class="userText"><span>' +
+              botHtml.toUpperCase() +
+            "</span></p>", btn, true);
             document
               .getElementById("userInput")
               .scrollIntoView({ block: "start", behavior: "smooth" });
+              
           });
+          // document.addEventListener("DOMContentLoaded", function(event){
+          //   checkresponse( userHtml, btn, true);
+          // });
+          
+        }
+
+        function checkresponse(userresponse, btn, check = false){
+          var response = ""
+          if (
+            userresponse.includes("MAIN ENGINE") ||
+            userresponse.includes("GENERATOR ENGINE") ||
+            userresponse.includes("ROTATOR")
+          ) {
+            console.log("Hicbm")
+            response = "HiCBM";
+            btn.innerText = "Go to HiCBM";
+            if (check == false){btn.style.display = "none";}
+            else{btn.style.display = ""}
+            
+          } else if (
+            userresponse.includes("CCTV") ||
+            userresponse.includes("SAFETY") ||
+            userresponse.includes("FIRE") ||
+            userresponse.includes("SOS")
+          ) {
+            response = "HiCAMS";
+            btn.innerText = "Go to HiCAMS";
+            if (check == false){btn.style.display = "none";}
+            else{btn.style.display = ""}
+          } else if (userresponse.includes("MAP") || userresponse.includes("ROUTE")) {
+            response = "HiMAP";
+            btn.innerText = "Go to HiMAP";
+            if (check == false){btn.style.display = "none";}
+            else{btn.style.display = ""}
+          }
+
         }
 
         function AIsolution() {
           const btn = document.getElementById("clickbutton");
           if (btn.innerText == "Go to HiCBM") {
-            window.location = "http://10.130.67.140:8001/";
+            window.location = "about_hicbm.html";
           } else if (btn.innerText == "Go to HiCAMS") {
-            window.location = "http://10.130.67.140:8000/";
+            window.location = "about_hicams.html";
           } else {
-            window.location = "http://10.130.67.140:8000/";
+            window.location = "about_himap.html";
           }
         }
 

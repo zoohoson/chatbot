@@ -15,9 +15,6 @@ def home():
 def get_bot_response():
     query = request.args.get('msg')
     openai.api_key = config.api_key
-
-
-
     #response = "engine blah blah blah"
     #response = request.get(f"0.0.0.0/987987/query")
 
@@ -33,9 +30,17 @@ def get_bot_response():
     return response
 
 
-@app.route("/hicams")
+@app.route("/about_hicams.html")
 def hicams():
     return render_template('about_hicams.html')
+
+@app.route("/about_hicbm.html")
+def hicbm():
+    return render_template('about_hicbm.html')
+
+@app.route("/about_himap.html")
+def himaps():
+    return render_template('about_himap.html')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=54321)
