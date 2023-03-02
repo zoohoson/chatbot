@@ -1,6 +1,0 @@
-name: NLP
-channels:
-  - conda-forge
-dependencies:
-  - flask=2.2.3
-  - python=3.8.16
