@@ -2,5 +2,7 @@ config.py
 
 #html
 *.about_hicams.html
+*.about_hicbm.html
+*.about_himap.html
 
 
