@@ -19,6 +19,8 @@ def get_bot_response():
     #response = request.get(f"0.0.0.0/987987/query")
 
     response = openai.Completion.create(
+        # model="gpt-3.5-turbo", 
+        # messages=[{"role": "user", "content": query}]
         prompt=query,
         model='text-davinci-003',
         max_tokens=1000,
