@@ -1,2 +1,6 @@
 config.py
-test.txt
+
+#html
+*.about_hicams.html
+
+
